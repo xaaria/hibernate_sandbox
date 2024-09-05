@@ -10,9 +10,5 @@ services:
             # other fields are defaults
             POSTGRES_PASSWORD: a1234
             PGPORT: 5430
-
-    adminer:
-        image: adminer
-        restart: always
         ports:
             - 5430:5430
