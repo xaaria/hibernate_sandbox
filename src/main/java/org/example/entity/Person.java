@@ -18,6 +18,13 @@ public class Person {
 
     private String lastname;
 
+    // Person lives in these houses
+    @ManyToMany
+    @JoinTable(name="HOUSE_RESIDENTS",
+        joinColumns=@JoinColumn(name="PERSON_ID"),
+        inverseJoinColumns=@JoinColumn(name="HOUSE_ID")
+    )
+    private Set<House> houses = new HashSet<>();
     //
 
     public Long getId() {

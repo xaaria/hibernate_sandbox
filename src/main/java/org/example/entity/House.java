@@ -2,6 +2,9 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static jakarta.persistence.GenerationType.UUID;
 
 @Entity
@@ -12,11 +15,14 @@ public class House {
     @GeneratedValue(strategy = UUID)
     private String uuid;
 
-    @Column
+    @Column(nullable = false)
     private String address;
 
-    @Column
+    @Column(nullable = false)
     private Integer number;
+
+    @ManyToMany(mappedBy = "houses")
+    private Set<Person> residents = new HashSet<>();
 
     //
 
@@ -44,6 +50,14 @@ public class House {
         this.uuid = uuid;
     }
 
+    public Set<Person> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(Set<Person> residents) {
+        this.residents = residents;
+    }
+
     //
 
     public House() {
@@ -57,6 +71,7 @@ public class House {
         this.setAddress(address);
         this.setNumber(number);
     }
+
 
 
 }
