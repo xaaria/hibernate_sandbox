@@ -1,9 +1,10 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -15,8 +16,13 @@ public class Person {
 
     private String firstname;
 
-
     private String lastname;
+
+    // 0=unkown, 1=female, 2=male
+    // TODO: use enum and add validator?
+    @Column(name="gender", nullable=false) // just testing no real need to use
+    @ColumnDefault("1")
+    private Integer sex;
 
     // Person lives in these houses
     @ManyToMany
@@ -25,6 +31,8 @@ public class Person {
         inverseJoinColumns=@JoinColumn(name="HOUSE_ID")
     )
     private Set<House> houses = new HashSet<>();
+
+
     //
 
     public Long getId() {
@@ -50,6 +58,22 @@ public class Person {
         this.lastname = lastname;
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Set<House> getHouses() {
+        return houses;
+    }
+
+    public void setHouses(Set<House> houses) {
+        this.houses = houses;
+    }
+
     //
 
     public Person() {
@@ -60,5 +84,6 @@ public class Person {
     public String toString() {
         return String.format("<Person (%f)>", this.getId());
     }
+
 
 }
