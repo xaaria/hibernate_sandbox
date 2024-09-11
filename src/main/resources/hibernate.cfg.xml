@@ -22,6 +22,7 @@
 
         <!-- List of annotated entity classes -->
         <mapping class="org.example.entity.Person"/>
+        <mapping class="org.example.entity.House"/>
 
     </session-factory>
 </hibernate-configuration>
