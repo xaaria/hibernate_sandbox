@@ -24,6 +24,9 @@ public class House {
     @ManyToMany(mappedBy = "houses")
     private Set<Person> residents = new HashSet<>();
 
+    @Embedded
+    private Town town;
+
     //
 
     public Integer getNumber() {
@@ -56,6 +59,14 @@ public class House {
 
     public void setResidents(Set<Person> residents) {
         this.residents = residents;
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
     }
 
     //
